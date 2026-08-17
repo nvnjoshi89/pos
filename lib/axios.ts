@@ -1,8 +1,8 @@
 import { API_URL } from "@/config/env.config";
-import axios from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { formatUrl } from "@/helpers/url.helper";
 import { STORAGE_KEYS } from "@/constants/storage.constants";
-import { headers } from "next/headers";
+import { toast } from "sonner";
 
 const BASE_URL = API_URL;
 let isRedirectingToLogin = false;
@@ -25,12 +25,24 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
-
 //Response interceptor
 axiosInstance.interceptors.response.use(
-  async(response)=>{
-    if(response.status === 200){
-      if(["POST","PUT","DELETE"].includes(response.config.method?.toUpperCase() || "" ))
-    }
+  async (response) => {
+  if (
+    ["POST", "PUT", "DELETE"].includes(
+      response.config.method?.toUpperCase() || "",
+    )
+  ) {
+    toast.success("Success", {
+      description: "Operation completed successfully",
+    });
   }
-)
+  return response.data;
+}
+
+async(error:AxiosError) =>{
+  const originalRequest = error.config as AxiosRequestConfig & {
+    _retry? : number;
+  }
+}
+);
