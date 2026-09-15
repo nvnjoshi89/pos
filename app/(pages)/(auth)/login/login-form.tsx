@@ -1,13 +1,56 @@
+"use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
 import { Form } from "@/components/form/form";
+import { FormField } from "@/components/form/form-field";
+import { useLoginMutation } from "@/store/api/authApi";
+import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginFormSchema } from "@/validators/auth";
+import { useStorage } from "@/hooks/use-storage";
+import { STORAGE_KEYS } from "@/constants/storage.constants";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithRef<"div">) {
+  const [login, { isLoading }] = useLoginMutation();
+  const router = useRouter();
+  const { setItem } = useStorage();
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(loginFormSchema),
+    mode: "onSubmit",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const onSubmit: SubmitHandler<LoginFormData> = async (
+    data: LoginFormData,
+  ) => {
+    try {
+      const response = await login(data).unwrap();
+      setItem(STORAGE_KEYS.ACCESS_TOKEN, response.accessToken);
+      setItem(
+        STORAGE_KEYS.USER,
+        JSON.stringify({
+          ...response,
+        }),
+      );
+      router.push("/user/user-management");
+    } catch (error) {
+      console.error("Login error", error);
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -37,7 +80,13 @@ export function LoginForm({
             </p>
           </div>
         </CardHeader>
-        <CardContent className="pt-4"></CardContent>
+        <CardContent className="pt-4">
+          <Form form={form} onSubmit={onSubmit}>
+            <div>
+              <FormField name="email" label="" />
+            </div>
+          </Form>
+        </CardContent>
       </Card>
     </div>
   );
