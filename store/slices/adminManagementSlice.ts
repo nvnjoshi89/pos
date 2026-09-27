@@ -35,3 +35,8 @@ const adminManagementSlice = createSlice({
     },
   },
 });
+
+export const { setAdmins, resetAdmins, updateMetadata } =
+  adminManagementSlice.actions;
+
+export default adminManagementSlice.reducer;
