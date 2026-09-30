@@ -70,7 +70,7 @@ export function LoginForm({
       )}
       {...props}
     >
-      <Card className="w-full border-white/30 bg-white/70 backdrop-blur-lg shadow-2xl rounded-3xl dark:border-white/10 dark:bg-gray-900/50 p-2">
+      <Card className="w-full border border-white/30  bg-white/70 backdrop-blur-lg shadow-2xl rounded-3xl dark:border-white/10 dark:bg-gray-900/50 p-2">
         <CardHeader className="flex flex-col items-center gap-4 text-center pb-2">
           <div className="relative group">
             <div className="absolute inset-0 bg-brand-400/20 rounded-2xl blur-md group-hover:blur-lg transition-all duration-300 pointer-events-none" />
