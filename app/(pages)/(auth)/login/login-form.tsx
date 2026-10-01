@@ -70,7 +70,7 @@ export function LoginForm({
       )}
       {...props}
     >
-      <Card className="w-full border border-white/30  bg-white/70 backdrop-blur-lg shadow-2xl rounded-3xl dark:border-white/10 dark:bg-gray-900/50 p-2">
+      <Card className="w-full border border-white/30 ring-0  bg-white/70 backdrop-blur-lg shadow-2xl rounded-3xl dark:border-white/10 dark:bg-gray-900/50 p-2">
         <CardHeader className="flex flex-col items-center gap-4 text-center pb-2">
           <div className="relative group">
             <div className="absolute inset-0 bg-brand-400/20 rounded-2xl blur-md group-hover:blur-lg transition-all duration-300 pointer-events-none" />
@@ -82,11 +82,10 @@ export function LoginForm({
               className="relative rounded-2xl border border-white/40 shadow-md group-hover:scale-105 transition-all duration-300 dark:border-white/10"
             />
           </div>
-          <div>
-            <CardTitle
-              title="SIP"
-              className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-            />
+          <div className="flex flex-col gap-1">
+            <CardTitle className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Pos Admin
+            </CardTitle>
             <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
               Sign in to manage your institution
             </p>
