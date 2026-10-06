@@ -12,6 +12,7 @@ const storageMiddleware: Middleware =
         setLocalStorage(STORAGE_KEYS.USER, (action as PayloadAction).payload);
         break;
     }
+    return next(action);
   };
 
 export const store = configureStore({

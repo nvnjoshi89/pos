@@ -48,6 +48,9 @@ export function LoginForm({
     data: LoginFormData,
   ) => {
     try {
+      console.log("data", data);
+      console.log("login:", typeof login, login);
+      console.log("result", login(data));
       const response = await login(data).unwrap();
       setItem(STORAGE_KEYS.ACCESS_TOKEN, response.accessToken);
       setItem(
