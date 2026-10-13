@@ -2,7 +2,7 @@
 
 import { STORAGE_KEYS } from "@/constants/storage.constants";
 import { clearAuthStorage, hasAuthToken } from "@/helpers/auth.helper";
-import { logout, setCredentials } from "@/store/authSlice";
+import { logout, setCredentials } from "@/store/slices/authSlice";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 

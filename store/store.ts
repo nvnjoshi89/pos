@@ -1,5 +1,5 @@
 import { configureStore, Middleware, PayloadAction } from "@reduxjs/toolkit";
-import authReducer, { setUser } from "./authSlice";
+import authReducer, { setUser } from "./slices/authSlice";
 import adminManagementReducer from "./slices/adminManagementSlice";
 import { setLocalStorage } from "@/helpers/localStorage";
 import { STORAGE_KEYS } from "@/constants/storage.constants";
